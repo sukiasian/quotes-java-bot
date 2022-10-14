@@ -12,7 +12,7 @@ public class WebhookProperties extends PropertyRetriever {
     private String ip;
     private String secretToken;
 
-    public WebhookProperties(String pathToPropertiesFile) throws IOException {
+    public WebhookProperties() throws IOException {
         super("webhook.properties");
 
         Properties property = super.getProperty();

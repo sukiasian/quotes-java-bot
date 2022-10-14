@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 
 import java.io.IOException;
 
-public class WebhookConfig extends SetWebhook {
+public class Webhook extends SetWebhook {
     WebhookProperties webhookProperties = new WebhookProperties("webhook.properties");
 
     {
@@ -13,6 +13,6 @@ public class WebhookConfig extends SetWebhook {
         super.setSecretToken(webhookProperties.getSecretToken());
     }
 
-    public WebhookConfig() throws IOException {
+    public Webhook() throws IOException {
     }
 }
