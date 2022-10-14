@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Server {
     private static HttpServerProperties properties;
@@ -24,12 +26,10 @@ public class Server {
     public static void connect() throws IOException{
         HttpServer server = HttpServer.create(new InetSocketAddress(properties.getAddress(), properties.getPort()), 0);
 
-        // нужен handler
-        server.createContext("*", new HttpHandler() {
-            @Override
-            public void handle(HttpExchange exchange) throws IOException {
-                exchange.getRequestMethod();
-            }
-        });
+        server.setExecutor(Executors.newCachedThreadPool());
+
+        server.createContext("/", new Dispatcher());
+
+        server.start();
     }
 }

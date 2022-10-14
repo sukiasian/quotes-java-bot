@@ -11,11 +11,11 @@ import java.io.OutputStream;
 @Getter
 public class Dispatcher  implements HttpHandler {
     private boolean areGetRequests(String method) {
-        return method.equals(RequestMethod.GET);
+        return method.equals("GET");
     }
 
     private boolean arePostRequests(String method) {
-        return method.equals(RequestMethod.POST);
+        return method.equals("POST");
     }
 
     private void processBytesThenWriteResponseAndClose(HttpExchange exchange, String data) throws IOException {
@@ -31,16 +31,11 @@ public class Dispatcher  implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        // GET handlers
+    // GET handlers
+    System.out.println(exchange.getRequestURI().getPath() + Paths.QUOTE_PATH + exchange.getRequestURI().getPath().contains(Paths.QUOTE_PATH));
         if(areGetRequests(exchange.getRequestMethod())) {
             if(exchange.getRequestURI().getPath().contains(Paths.QUOTE_PATH)) {
                 processBytesThenWriteResponseAndClose(exchange, QuotesHandler.getQuote());
-
-                // handlers if there are queryParams
-//                if(getQueryParam(exchange, "hi") != null) {
-//
-//                };
-
             }
         }
 
